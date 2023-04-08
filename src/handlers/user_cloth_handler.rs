@@ -1,24 +1,26 @@
-use crate::models::mcollectioncloth::All_Detail_List;
-use actix_web::{get, web, App, HttpResponse, HttpServer, Responder};
-use log::{debug, info};
+use crate::models::mcollectioncloth::AllDetailClothCollection;
+use actix_web::{get, web, HttpResponse, Responder};
+use log::{info};
 use serde::{Deserialize, Serialize};
 use serde_json::json;
 
 #[derive(Serialize, Deserialize)]
-struct Event_id_cloth {
+struct EventidCloth {
     id_cloth: String,
 }
 
+//************ User ดูแค่ Cloth(เสื้อผ้า) ที่สนใจซื้อเพียง 1 ตัวเท่านั้น **********//
+
 #[get("/user/cloth/{id_cloth}")]
-async fn view_cloth_only_user(id: web::Path<String>,input_form: web::Json<Event_id_cloth>,) -> impl Responder {
-    info!("Show Homepage Like User's view");
+async fn view_cloth_only_user(id: web::Path<String>,input_form: web::Json<EventidCloth>) -> impl Responder {
+    info!("Show Only Cloth");
 
     let id: String = id.to_string();
     let cloth_id = input_form.into_inner();
     // let id:String = id.to_string();
-    let mut _data1 = All_Detail_List {
+    let mut _data1 = AllDetailClothCollection {
         name_cloth: "Snowman Overcoat".to_string(),
-        id_cloth: "Cool_win_1".to_string(),
+        id_cloth: cloth_id.id_cloth.to_string(),
         name_collection: "Be cool in Winter".to_string(),
         id_collection: "Cool_win".to_string(),
         description_cloth: "...Description...".to_string(),
@@ -29,10 +31,10 @@ async fn view_cloth_only_user(id: web::Path<String>,input_form: web::Json<Event_
         stock_of_cloth: 42,
         date: "2023-03-20".to_string(),
     };
-    let mut message = "";
+    let mut message = "Show Only Cloth user want to buy";
     //เช็คว่าid_Collection ว่าurl ตรงกับ bodyไหม
     if id.to_string() != cloth_id.id_cloth.to_string() {
-        _data1 = All_Detail_List {
+        _data1 = AllDetailClothCollection {
             name_cloth: "No Data".to_string(),
             id_cloth: "No Data".to_string(),
             name_collection: "No Data".to_string(),
@@ -52,7 +54,7 @@ async fn view_cloth_only_user(id: web::Path<String>,input_form: web::Json<Event_
 
     #[derive(Serialize, Deserialize)]
     struct WebResponse {
-        detail_cloth: All_Detail_List,
+        detail_cloth: AllDetailClothCollection,
         message: String,
     }
 
@@ -66,10 +68,4 @@ async fn view_cloth_only_user(id: web::Path<String>,input_form: web::Json<Event_
     HttpResponse::Ok().json(response)
 }
 
-#[actix_web::main]
-async fn main() -> std::io::Result<()> {
-    HttpServer::new(|| App::new().service(view_cloth_only_user))
-        .bind("127.0.0.1:8082")?
-        .run()
-        .await
-}
+

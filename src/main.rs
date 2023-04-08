@@ -13,9 +13,8 @@ async fn main() -> std::io::Result<()> {
     env_logger::init();
     let server = HttpServer::new(|| {
         App::new()
-            .configure(admin_collection_route::config)
-            // .configure(deleteforadmin_route::config)
             .configure(admin_homepage_route::config)
+            .configure(admin_collection_route::config)
             .configure(admin_cloth_route::config)
             .configure(user_collection_route::config)
             .configure(user_cloth_route::config)

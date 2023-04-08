@@ -3,7 +3,7 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize,Deserialize)]
-pub struct All_Detail_List {
+pub struct AllDetailClothCollection {
     pub name_cloth: String,
     pub id_cloth: String,
     pub name_collection: String,
@@ -18,7 +18,7 @@ pub struct All_Detail_List {
 }
 
 #[derive(Serialize,Deserialize)]
-pub struct Collection_Cloth_ID_List{
+pub struct HeaderClothCollection {
     pub name_cloth: String,
     pub id_cloth: String,
     pub name_collection: String,
@@ -26,7 +26,7 @@ pub struct Collection_Cloth_ID_List{
 }
 
 #[derive(Serialize,Deserialize)]
-pub struct Collection_Detail_List{
+pub struct BodyClothCollection {
     pub description_cloth: String,
     pub cost_cloth: i32,
     pub type_cloth: String,

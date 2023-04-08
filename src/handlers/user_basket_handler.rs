@@ -1,17 +1,18 @@
-use std::{process::id, string};
-
-use crate::models::mbasket::idClothCollection;
-use crate::models::mcollectioncloth::All_Detail_List;
-use actix_web::{delete, get, post, web, HttpResponse, Responder,App,HttpServer,put};
-use log::{debug, info};
+use crate::models::mbasket::IdClothCollection;
+use crate::models::mcollectioncloth::AllDetailClothCollection;
+use actix_web::{delete, get, post, web, HttpResponse, Responder};
+use log::{info};
 use serde::{Deserialize, Serialize};
 use serde_json::json;
+
+
+//**********  User สามารถดูรายการสั่งซื้อสินค้าในตะกร้าได้ ************//
 
 #[get("/user/basket")]
 async fn view_order_basket() -> impl Responder {
     info!("Show item in basket");
 
-    let mut _data1 = All_Detail_List {
+    let mut _data1 = AllDetailClothCollection {
         name_cloth: "Snowman Overcoat".to_string(),
         id_cloth: "Cool_win_1".to_string(),
         name_collection: "Be cool in Winter".to_string(),
@@ -24,7 +25,7 @@ async fn view_order_basket() -> impl Responder {
         stock_of_cloth: 42,
         date: "2023-03-20".to_string(),
     };
-    let mut _data2 = All_Detail_List {
+    let mut _data2 = AllDetailClothCollection {
         name_cloth: "White Miniskirt".to_string(),
         id_cloth: "Y2K_1".to_string(),
         name_collection: "Back to Y2K".to_string(),
@@ -37,7 +38,7 @@ async fn view_order_basket() -> impl Responder {
         stock_of_cloth: 20,
         date: "2023-03-20".to_string(),
     };
-    let mut _data3 = All_Detail_List {
+    let mut _data3 = AllDetailClothCollection {
         name_cloth: "Cargo Pant".to_string(),
         id_cloth: "Into_wood_1".to_string(),
         name_collection: "Into the wood".to_string(),
@@ -54,9 +55,9 @@ async fn view_order_basket() -> impl Responder {
     #[derive(Serialize, Deserialize)]
     struct WebResponse {
         id_basket: String,
-        detail_all_1: All_Detail_List,
-        detail_all_2: All_Detail_List,
-        detail_all_3: All_Detail_List,
+        detail_all_1: AllDetailClothCollection,
+        detail_all_2: AllDetailClothCollection,
+        detail_all_3: AllDetailClothCollection,
         message: String,
     }
 
@@ -73,54 +74,16 @@ async fn view_order_basket() -> impl Responder {
     HttpResponse::Ok().json(response)
 }
 
-#[derive(Serialize, Deserialize)]
-    struct idfordelete {
-        id_basket: String,
-        id_cloth:String
-    }
+// //************* User เพิ่มเสื้อผ้าที่ต้องการซื้อลงในตะกร้า *********************//
 
-
-#[delete("/user/basket/{id_basket}/{id_cloth}")]
-async fn delete_clothformbasket(
-    id: web::Path<idfordelete>,
-) -> impl Responder {
-    info!("user delete cloth form basket. (http:delete)");
-
-    let mut _id_delete = idfordelete{
-        id_cloth : id.id_cloth.to_string(),
-        id_basket : id.id_basket.to_string(),
-    };
-
-    //สมมติ(Test)[/admin/addition/Test01]
-
-    //รวมกับ message ของระบบเพื่อแจ้งเตือนการแสดงผล
-
-    #[derive(Serialize, Deserialize)]
-    struct WebResponse {
-        id: idfordelete,
-        message: String,
-    }
-
-    let web_response = WebResponse {
-        id: _id_delete,
-        message: "Delete cloth in basket are complete !".to_string(),
-    };
-
-    let response = json!(web_response);
-
-    HttpResponse::Ok().json(response)
-}
-
-
-// //********************************* */
 #[post("/user/basket/{id_basket}")]
 async fn add_order2basket(
     id: web::Path<String>,
-    input_form: web::Json<idClothCollection>,
+    input_form: web::Json<IdClothCollection>,
 ) -> impl Responder {
     info!("user add Cloth to basket. (http:post)");
 
-    let mut _iddata = idClothCollection {
+    let mut _iddata = IdClothCollection {
         id_collection: input_form.id_collection.to_string(),
         id_cloth: input_form.id_cloth.to_string(),
     };
@@ -132,7 +95,7 @@ async fn add_order2basket(
     #[derive(Serialize, Deserialize)]
     struct WebResponse {
         id_basket: String,
-        detail_id: idClothCollection,
+        detail_id: IdClothCollection,
         message: String,
     }
 
@@ -147,20 +110,68 @@ async fn add_order2basket(
     HttpResponse::Created().json(response)
 }
 
+
+
+
 #[derive(Serialize, Deserialize)]
-struct confirmid {
+    struct Idfordelete {
+        id_basket: String,
+        id_cloth:String
+    }
+
+//*********** User ลบเสื้อผ้าที่ไม่ต้องการซื้อออกจากตะกร้า *************//
+
+#[delete("/user/basket/{id_basket}/{id_cloth}")]
+async fn delete_clothformbasket(
+    id: web::Path<Idfordelete>,
+) -> impl Responder {
+    info!("user delete cloth form basket. (http:delete)");
+
+    let mut _id_delete = Idfordelete{
+        id_cloth : id.id_cloth.to_string(),
+        id_basket : id.id_basket.to_string(),
+    };
+
+    //สมมติ(Test)[/admin/addition/Test01]
+
+    //รวมกับ message ของระบบเพื่อแจ้งเตือนการแสดงผล
+
+    #[derive(Serialize, Deserialize)]
+    struct WebResponse {
+        id: Idfordelete,
+        message: String,
+    }
+
+    let web_response = WebResponse {
+        id: _id_delete,
+        message: "Delete cloth in basket are complete !".to_string(),
+    };
+
+    let response = json!(web_response);
+
+    HttpResponse::Ok().json(response)
+}
+
+
+
+
+#[derive(Serialize, Deserialize)]
+struct Confirmid {
     id_basket: String,
 }
+
+//***************** User ตกลงสั่งซื้อสินค้าในตะกร้า S********************//
+
 #[post("/user/basket")]
-async fn confirm_order(input_form:web::Json<confirmid>) -> impl Responder {
+async fn confirm_order(input_form:web::Json<Confirmid>) -> impl Responder {
     info!("confirm Clothes's By IDCollection ");
 
-    let mut id_basket = confirmid{
+    let id_basket = Confirmid{
         id_basket : input_form.id_basket.to_string()
     };
     #[derive(Serialize, Deserialize)]
     struct WebResponse {
-        id_basket: confirmid,
+        id_basket: Confirmid,
         message: String,
     }
 
