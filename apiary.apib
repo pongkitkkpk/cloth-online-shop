@@ -1,0 +1,431 @@
+FORMAT: 1A
+HOST: https://Cloth.apiblueprint.org/
+
+# Clothes Online Shop
+
+API ของเว็บขายเสื้อผ้าออนไลน์ 
+
+## Show Homepage Like User's view For Admin [/admin/homepage]
+
+### Show Homepage Like User's view [GET]
+
+Admin สามารถดูหน้า Home page ได้ในมุมมองเดียวกันกับที่ User เห็นตอนเลือกซื้อสินค้า
+
++ Response 200 (application/json)
+
+    + Body
+    
+            [
+            {
+                "message": "This is Homepage when user use this web to buy your clothes.",
+                
+                "detail": [
+                    {
+                        "name_cloth":"Snowman Overcoat",
+                        "id_cloth":"Cool_win_1",
+                        "name_collection":"Be cool in Winter",
+                        "id_collection":"Cool_win",
+                        "description_cloth":"...Description...",
+                        "cost_cloth":1199,
+                        "type_cloth":"Tops",
+                        "material_of_cloth":"Wool",
+                        "sex_cloth":"Female",
+                        "stock_of_cloth":42,
+                        "date" : 2023-03-20
+                    }, {
+                        "name_cloth":"White Miniskirt",
+                        "id_cloth":"Y2K_1",
+                        "name_collection":"Back to Y2K",
+                        "id_collection":"Y2K",
+                        "description_cloth":"...Description...",
+                        "cost_cloth":559,
+                        "type_cloth":"Bottoms",
+                        "material_of_cloth":"Yeans",
+                        "sex_cloth":"Female",
+                        "stock_of_cloth":20,
+                        "date" : 2023-03-20
+                    }, {
+                        "name_cloth":"Cargo Pant",
+                        "id_cloth":"Into_wood_1",
+                        "name_collection":"Into the wood",
+                        "id_collection":"Into_wood",
+                        "description_cloth":"...Description...",
+                        "cost_cloth":699,
+                        "type_cloth":"Bottoms",
+                        "material_of_cloth":"Cotton",
+                        "sex_cloth":"Male",
+                        "stock_of_cloth":14,
+                        "date" : 2023-03-21
+                    }
+                ]
+            }
+            ]
+ 
+## Clothes's collection For Admin [/admin/collection]
+
+### Add Clothes's Collection[POST]
+
+Admin สามารถเพิ่ม Clothes's Collection ได้
+
++ Request (application/json)
+
+    + Body
+    
+            [
+            {
+                "message": "Add your new cloth's collection in here!",
+                
+                "detail": [
+                    {
+                        "name_cloth",
+                        "id_cloth",
+                        "name_collection",
+                        "id_collection",
+                        "description_cloth",
+                        "cost_cloth",
+                        "type_cloth",
+                        "material_of_cloth",
+                        "sex_cloth",
+                        "stock_of_cloth",
+                        "date"
+                    }
+                ]
+            }    
+            ]
+        
++ Response 201 (application/json)
+
+
+    + Body
+    
+            [
+            {
+                "message" :"Your new cloth's collection are complete! 
+                            Please check your detail about your new cloth's collection.",
+                
+                "detail" :
+                {
+                    "name_cloth":"Hawaii Shirt",
+                    "id_cloth":"S_2023_1",
+                    "name_collection":"Summer Of 2023",
+                    "id_collection":"S_2023",
+                    "description_cloth":"This shirt is made to easy to wear in every single days :-)",
+                    "cost_cloth":399,
+                    "type_cloth":"Tops",
+                    "material_of_cloth":"Linin",
+                    "sex_cloth":"Unisex",
+                    "stock_of_cloth":10,
+                    "date" : 2023-03-20
+                }
+            }
+            ]
+        
+### Delete Clothes's Collection [DELETE]
+
+Admin สามารถลบ Clothes's Collection ได้
+
++ Request 
+
+    + Header
+    
+            id_collection : "S_2023"
+        
++ Response 200 (application/json)
+
+    + Header
+    
+            Location : /admin/colletion/s_2023
+
+    + Body
+    
+            [
+            {
+                    "message" :"Delete Clothes's Collection Complete!"
+            }
+            ]
+ 
+## Edit description and cost For Admin [/admin/cloth]
+
+### Edit Description And Cost Of Clothes [PUT]
+
+Admin สามารถแก้ไขคำอธิบายและราคาของ Clothes's Collection ได้พร้อมลงวันที่การแก้ไขข้อมูลครั้งล่าสุด
+
++ Request (application/json)
+
+    + Body
+    
+            
+            {
+                "data_cloth":{
+                    "id_cloth":"Y2K_1"
+                },
+                
+                "detail":{
+                    "description_cloth",
+                    "cost_cloth",
+                    "date" 
+                }
+            
+            }
+            
+  
++ Response 201 (application/json)
+
+    + Header
+    
+            Location : /admin/cloth/Y2K_1
+            
+
+    + Body
+    
+            [
+                {
+                "message" :"Your new correction are complete! 
+                            Please check your detail about your new correction.",
+        
+                    "detail": {
+                        "description_cloth":"...Description...",
+                        "cost_cloth":659,
+                        "date":"2023-05-24" 
+                    }
+                
+            }
+            ]
+
+## Clothes's Collection For User [/user/collection]
+
+### View All Clothes's Collection In Homepage [GET]
+
+User ดู Cothes's Collection ทั้งหมดในหน้า Homepage
+
++ Response 200 (application/json)
+
+    + Body
+    
+            [
+            {
+                "message": "Homepage",
+                
+                "detail": [
+                    {
+                        "name_cloth":"Hawaii Shirt",
+                        "id_cloth":"S_2023_1",
+                        "name_collection":"Summer Of 2023",
+                        "id_collection":"S_2023",
+                        "description_cloth":"This shirt is made to easy to wear in every single days :-)",
+                        "cost_cloth":399,
+                        "type_cloth":"Tops",
+                        "material_of_cloth":"Linin",
+                        "sex_cloth":"Unisex",
+                        "stock_of_cloth":10,
+                        "date" : 2023-03-20
+                    }, {
+                        "name_cloth":"Snowman Overcoat",
+                        "id_cloth":"Cool_win_1",
+                        "name_collection":"Be cool in Winter",
+                        "id_collection":"Cool_win",
+                        "description_cloth":"...",
+                        "cost_cloth":1199,
+                        "type_cloth":"Tops",
+                        "material_of_cloth":"Wool",
+                        "sex_cloth":"Female",
+                        "stock_of_cloth":42,
+                        "date" : 2023-03-20
+                    }, {
+                        "name_cloth":"White Miniskirt",
+                        "id_cloth":"Y2K_1",
+                        "name_collection":"Back to Y2K",
+                        "id_collection":"Y2K",
+                        "description_cloth":"...",
+                        "cost_cloth":559,
+                        "type_cloth":"Bottoms",
+                        "material_of_cloth":"Yeans",
+                        "sex_cloth":"Female",
+                        "stock_of_cloth":20,
+                        "date" : 2023-03-20
+                    }, {
+                        "name_cloth":"Cargo Pant",
+                        "id_cloth":"Into_wood_1",
+                        "name_collection":"Into the wood",
+                        "id_collection":"Into_wood",
+                        "description_cloth":"...",
+                        "cost_cloth":699,
+                        "type_cloth":"Bottoms",
+                        "material_of_cloth":"Cotton",
+                        "sex_cloth":"Male",
+                        "stock_of_cloth":14,
+                        "date" : 2023-03-21
+                    }
+                ]
+            }
+            ]
+
+
+### View Only Clothes's Collection That User Want To Buy [POST]
+
+User ดูแค่ Clothes's Collection ที่สนใจซื้อเพียง 1 Collection เท่านั้น
+
++ Request
+        
+   + Header
+    
+            id_collection : "Cool_win"
+
++ Response 200 (application/json)
+
+    + Header
+    
+            Location : /user/collection/Cool_win
+
+    + Body
+    
+            [
+            {
+                "name_cloth":"Snowman Overcoat",
+                "id_cloth":"Cool_win_1",
+                "name_collection":"Be cool in Winter",
+                "id_collection":"Cool_win",
+                "description_cloth":"...",
+                "cost_cloth":1199,
+                "type_cloth":"Tops",
+                "material_of_cloth":"Wool",
+                "sex_cloth":"Female",
+                "stock_of_cloth":42,
+                "date" : 2023-03-20
+            }
+            ]
+        
+## Cloth For User [/user/cloth]
+
+### View Just One Cloth That User Want To Buy [POST]
+
+User ดูแค่ Cloth(เสื้อผ้า) ที่สนใจซื้อเพียง 1 ตัวเท่านั้น
+
++ Request
+        
+   + Header
+    
+            id_cloth : "Into_wood_1"
+
++ Response 200 (application/json)
+
+
+    + Header
+    
+            Location : /user/cloth/Into_wood_1
+
+    + Body
+    
+            [
+            {
+                "name_cloth":"Cargo Pant",
+                "id_cloth":"Into_wood_1",
+                "name_collection":"Into the wood",
+                "id_collection":"Into_wood",
+                "description_cloth":"...",
+                "cost_cloth":699,
+                "type_cloth":"Bottoms",
+                "material_of_cloth":"Cotton",
+                "sex_cloth":"Male",
+                "stock_of_cloth":14,
+                "date" : 2023-03-21
+            }
+            ]
+    
+
+## Basket For User [/user/basket]
+
+### View Orders In User's Basket [GET]
+
+User สามารถดูรายการสั่งซื้อสินค้าในตะกร้าได้
+
++ Response 200 (application/json)
+
+        [
+            {
+                "id_basket" : "basket0001",
+                
+                "message" :"Your orders are here!",
+            
+                "detail" : "name_cloth":"Cargo Pant",
+                            "id_cloth":"Into_wood_1",
+                            "name_collection":"Into the wood",
+                            "id_collection":"Into_wood",
+                            "description_cloth":"...",
+                            "cost_cloth":699,
+                            "type_cloth":"Bottoms",
+                            "material_of_cloth":"Cotton",
+                            "sex_cloth":"Male",
+                            "stock_of_cloth":14,
+                            "date" : 2023-03-21
+            }
+        ]
+
+### Add Clothes Into User's Basket [POST]
+
+User เพิ่มเสื้อผ้าที่ต้องการซื้อลงในตะกร้า
+
++ Request (application/json)
+
+        {
+            "id_collection": "Y2K",
+            "id_cloth": "Y2K_1"
+        }
+        
+    
++ Response 200 (application/json)
+
+    + Header
+    
+            Location : /user/basket/basket0001
+
+    + Body
+            
+            {
+                "message" : "Add cloth to basket are complete !"
+            }
+            
+
+### Delete Clothes In User's Basket [DELETE]
+
+User ลบเสื้อผ้าที่ไม่ต้องการซื้อออกจากตะกร้า
++ Request
+
+            { 
+                "id_basket": "basket0001" 
+                "id_cloth" : "Y2K_1"
+            }
+            
++ Response 200 (application/json)
+
+    + Header
+    
+            Location : /user/basket/basket0001/Y2K_1
+
+    + Body
+    
+            {
+                "message" : "Delete cloth in basket are complete !"
+            }
+
+  
+
+
+### Confirm Order In User's Basket [PUT]
+
+User ตกลงสั่งซื้อสินค้าในตะกร้า
+
++ Request
+
+            { 
+                "id_basket": "basket0001" 
+            }
+        
+
++ Response 200 (application/json)
+
+        [
+            {
+                "message" :"Your order is done! Thank you. Have a nice day."
+            }
+        ]
