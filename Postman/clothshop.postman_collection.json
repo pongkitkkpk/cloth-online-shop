@@ -1,0 +1,355 @@
+{
+	"info": {
+		"_postman_id": "fd96c372-e40a-4922-9085-e4b6d611e55f",
+		"name": "clothshop",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "admin",
+			"item": [
+				{
+					"name": "admin_collection(add)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_collection\": \"S_2023\",\r\n    \"name_collection\": \"Win1\",\r\n    \"id_cloth\": \"Winter\",\r\n    \"name_cloth\": \"Test01\",\r\n    \"description_cloth\": \"testq first\",\r\n    \"cost_cloth\": 499,\r\n    \"type_cloth\": \"Tops\",\r\n    \"material_of_cloth\": \"Cotton\",\r\n    \"sex_cloth\": \"Unisex\",\r\n    \"stock_of_cloth\": 50,\r\n    \"date\": \"2023-12-02\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8082/admin/collection",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"admin",
+								"collection"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "admin_collection(delete)",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_collection\": \"S_2022\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8082/admin/collection/Tel",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"admin",
+								"collection",
+								"Tel"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "admin_cloth(edit)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_cloth\": \"T48\",\r\n    \"description_cloth\": \"test\",\r\n    \"cost_cloth\": 99,\r\n    \"date\": \"15-10-23\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8082/admin/edit/Test",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"admin",
+								"edit",
+								"Test"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "admin_homepage",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8082/admin/homepage",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"admin",
+								"homepage"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "basket",
+					"item": [
+						{
+							"name": "user_basket(view)",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:8082/user/basket",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"user",
+										"basket"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "user_basket(add)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id_collection\": \"Cool_win\",\r\n    \"id_cloth\": \"Cool_wind\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8082/user/basket/basket0001",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"user",
+										"basket",
+										"basket0001"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "user_basket(delete)",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8082/user/basket/basket0/545x",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"user",
+										"basket",
+										"basket0",
+										"545x"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "user_basket(confirm)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id_basket\": \"basket0\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8082/user/basket",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"user",
+										"basket"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "user_collection(all)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8082/user/collection",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"user",
+								"collection"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user_collection(only)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_collection\" : \"Cool_wind\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8082/user/collection/test",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"user",
+								"collection",
+								"test"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user_cloth",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_cloth\" : \"snowman\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8082/user/cloth/snow",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"user",
+								"cloth",
+								"snow"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
